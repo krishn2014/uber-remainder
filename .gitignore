@@ -1,0 +1,14 @@
+*.py[co]
+*.sw[po]
+*.bak
+*.orig
+*~
+.project
+.pydevproject
+env
+*~
+*.db
+searchindexdb
+search_index
+__pycache__
+custom_env.py

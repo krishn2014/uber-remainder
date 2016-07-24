@@ -1,0 +1,202 @@
+things needed:
+
+    Python 2.7.x
+    easy_install and pip
+    Git 1.7/1.8
+    virtualenv
+    Django
+    Database (SQLite, MySQL, PostgreSQL)
+    South
+    Text editor (Sublime, vim, Komodo, gedit)
+
+===============================================
+
+sudo apt-get install tree
+sudo apt-get install python-setuptools
+python -V
+sudo easy_install pip
+git --version
+
+# to update distributions
+easy_install -U distribute
+
+# sudo apt-get install python-virtualenv
+easy_install -U setuptools
+pip install virtualenv
+mkdir new_project
+cd new_project
+
+virtualenv --no-site-packages env
+
+source env/bin/activate
+# to deactivate virtual env
+# deactivate
+
+# setup mysql
+sudo apt-get install mysql-server mysql-client
+# sudo mysqladmin -u root -h localhost password 'tiger'
+# sudo mysqladmin -u root -h mac-computer password 'mypassword'
+
+sudo apt-get install libmysqlclient-dev python.dev
+
+# database setup
+
+pip install MySQL-python
+# this is a db connector for python
+
+# ------------------------------------
+mysql.server start 
+mysql -u root -p
+CREATE DATABASE django_db
+quit
+
+# to reset mysql root password do this
+kill -9 pid of mysqld
+echo "UPDATE mysql.user SET Password=PASSWORD('tiger') WHERE User='root';
+FLUSH PRIVILEGES;" > temp
+mysqld_safe --init-file=temp &
+# else use
+ mysqld --skip-grant-tables 
+ and run the above query
+ sudo /etc/init.d/mysql stop
+ 
+# -------------------------------------
+
+pip install django==1.5.4
+
+#some checks
+python
+
+import django
+django.get_version()
+#'1.5.4'
+
+# project setup
+django-admin.py startproject mysite
+
+# to create an app
+python manage.py startapp myapp
+
+# this creates new directory called mysite
+# ignore the following in version control
+.Python
+env
+bin
+lib
+include
+.DS_Store
+.pyc
+####################
+
+# add the following settings in settings.py in mysite directory
+DATABASES = {
+    'default': { 
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'django_db',                     
+        'USER': 'root',
+        'PASSWORD': 'your_password',
+    }
+}
+##########
+
+# Create your database tables and set up a superuser:
+# i.e. after editing setiings.py synch db
+cd mysite
+python manage.py syncdb
+
+# to launch server
+python manage.py runserver
+
+# South is used for managing changes to your database tables.
+pip install south
+
+# use the following command to create a record of the installed libraries:
+pip freeze > requirements.txt
+
+# tentative Create your new app:
+python manage.py startapp myapp
+
+############# project structure #################
+├── manage.py
+├── myapp
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+└── mysite
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+    
+#################################################
+
+# update INSTALLED_APPS in your settings.py file:
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'myapp',
+    'south',
+)
+****************************************************
+# vim settings
+set tabstop=8 expandtab shiftwidth=4 softtabstop=4
+****************************************************
+# project setup
+django-admin.py startproject mysite
+
+# after editing setiings.py synch db
+cd mysite
+python manage.py syncdb
+
+python manage.py inspectdb
+
+# to launch server
+python manage.py runserver
+
+# to make an app 
+python manage.py startapp myapp
+
+
+
+****************************************************
+sql interactions
+****************************************************
+
+# go to shell 
+python manage.py shell
+
+link1 = Link(url='http://www.packtpub.com/')
+link1.save()
+
+link2.url = 'http://www.google.com/'
+link2.save()
+
+links = Link.objects.all()
+for link in links:
+	print link.url
+
+Link.objects.get(id=1)
+<Link: Link object>
+
+link2.delete()
+Link.objects.count()
+
+
+===============================================
+from django.contrib.auth.models import User
+User.objects.all()
+
+lakshya
+iwilldoit123
+warrior
+letsdoit123
+Django application credentials:
+	user: admin
+	Rm4cLJDEMb4c
+

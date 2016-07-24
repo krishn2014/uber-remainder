@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Set Remainders</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="page-header">
+            <h1 style="padding-left:25px;"><a href="/">Set Remainders</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="row">
+                <h1>Recent Requests</h1>
+                <ul class="list-group col-md-8">
+                {% for req in recent_requests %}
+                    <li class="list-group-item">Requested uber remainder for {{ req.emailid }} for time {{ req.travel_date_time }}</li>
+                {% empty %}
+                    <li class="list-group-item">No requests yet.</li>
+                {% endfor %}
+                </ul> 
+            </div>         
+        </div>
+        <div class="panel-footer">
+            Remainder app.
+        </div>
+    </body>
+</html>

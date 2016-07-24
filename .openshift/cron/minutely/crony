@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "************ Crony Started ***************"
+date >> ${OPENSHIFT_DATA_DIR}/ticktock-start.log
+
+source ${OPENSHIFT_HOMEDIR}/python/virtenv/bin/activate
+python ${OPENSHIFT_REPO_DIR}/wsgi/mainapp/manage.py runcrons
+
+echo "************ Crony Executed ***************"
